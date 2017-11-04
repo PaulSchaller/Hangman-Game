@@ -1,6 +1,26 @@
-h1 {
+h1
+	{
 	background-color: black;
 	color: white;
-	font-size = "y"
-		text-align:  center;
+	font-size: 150px;
+	text-align:  center;
 	}
+
+h2 
+	{ 
+	font-size:  100px; 
+}
+
+h4,
+h3
+	{
+	font-size:  30px; 
+	}
+
+h5 
+	{
+	background-color:  black;
+	font-size:  100px;
+	color:  white;
+	}
+
