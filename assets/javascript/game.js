@@ -1,56 +1,60 @@
-document.onkeyup = function(event){
-
-
-	function game(){
-
-	var colors = ["blue", "red", "purple", "black", "pink", "green", "gray", "orange", "yellow"];
-	var word = colors[Math.floor(Math.random()*colors.length)];
-	var guessesLeft = 10;
-	var answerArray = []; 
-	var text;	
-
-
-
-	for (var i = 0; i < word.length; i++){
-			asnwerArray[i] = "_";
+var colors = ["blue", "red", "purple", "black", "pink", "green", "gray", "orange", "yellow"];
+var word = colors[Math.floor(Math.random()*colors.length)];
+var guessesLeft = 10;
+var answerArray = []; 
+var text;
+var guesses = [];
+console.log("helol")
+function updateAnswerArray(){
+	answerArray = [];
+		for (var i = 0; i < word.length; i++){
+			var wordLetter = word[i];
+			if (guesses.includes(wordLetter)){
+				answerArray.push(wordLetter);
+			}
+			else {
+				answerArray.push("_");
+			}
+			// text = word.split("").join(" ");
+			// console.log(text);
 		}
 
+}
 
+document.onkeyup = function(event){
+		var letterInput = String.fromCharCode(event.which).toLowerCase();
+		updateAnswerArray();
+		console.log(guesses, word, answerArray.join(" "))
+		if (answerArray.join("") === word){
+		document.getElementById("congratulations").innerHTML = "Congratulations.  You won.";
+		// 					//document.body.style.backgroundColor = "word";
+		}
+		if (!guesses.includes(letterInput)){
+			guesses.push(letterInput);
+			if (!word.includes(letterInput)){
+				guessesLeft--;
+				document.getElementById("counter").innerHTML = "Guess Left " + guessesLeft;
+			} else {
+				updateAnswerArray();
+				document.getElementById("answer").innerHTML = answerArray.join(" ");
 
-	for (guessesLeft > 0){
-
-	text = answerArray.join(" ");
-  	document.getElementById("answer").innerHTML = text;
-	
-
-	
-	document.onkeyup = function(event){
-		var letterInput = String.fromCharCode(event.key).toLowerCase();
-
-	for (var i = 0; i < word.length; i++)
-			if (if answerArray[i] == letterInput){
-				answerArray[i] = letterInput;
-				if (text === word){
-					document.getElementById("congratulations").innerHTML = "Congratulations.  You won.";
-					//document.body.style.backgroundColor = "word";
-					function game();
-				}
 			}
-			guessesLeft--;	
-			document.getElementById("counter").innerHTML = "Guess Left " + guessesLeft;
-    		document.getElementById("answer").innerHTML = answerArray.join(" ");
-  }
-  			if (guessesLeft == 0){
-  				document.write("You lose the game.");
-;  			}
-}
-		
-}
+		}
+		// for (var i = 0; i < word.length; i++) {
 
-}
-function game();
-}
+		// 	if (word[i] == letterInput){
+		// 		answerArray[i] = letterInput;;
 
+		// 		
+		// 				}
+		// 			}
+		// 			guessesLeft--;	
+		// 			document.getElementById("answer").innerHTML = answerArray.join(" ");
 
-function game();
-};
+		// 			if (guessesLeft == 0){
+		// 				document.getElementById("counter").innerHTML = "You lose the game.";
+		// 				game();
+		// 			}
+
+		// 		}
+		};
