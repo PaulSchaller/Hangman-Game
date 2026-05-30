@@ -10,16 +10,21 @@ initializeGame();
 
 function initializeGame() {
     word = colors[Math.floor(Math.random() * colors.length)];
-    console.log("Selected word:", word);
     guessesLeft = 10;
     guesses = [];
 
     answerArray = [];
+
     for (var i = 0; i < word.length; i++) {
         answerArray[i] = "_";
     }
 
+    document.getElementById("congratulations").textContent = "";
+    document.getElementById("lose").textContent = "";
+
     updateDisplay();
+
+    console.log("Selected word:", word);
 }
 
 function updateDisplay() {
