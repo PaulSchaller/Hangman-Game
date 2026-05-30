@@ -1,4 +1,3 @@
-alert("game(a).js loaded");
 var colors = ["blue", "red", "purple", "pink", "green", "orange", "yellow", "gray"];
 
 var word;
@@ -23,8 +22,6 @@ function initializeGame() {
     document.getElementById("lose").textContent = "";
 
     updateDisplay();
-
-    console.log("Selected word:", word);
 }
 
 function updateDisplay() {
