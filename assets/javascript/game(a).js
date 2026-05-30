@@ -5,102 +5,84 @@ var guessesLeft;
 var answerArray;
 var guesses;
 
-console.log("hello");
+initializeGame();
 
 function initializeGame() {
     word = colors[Math.floor(Math.random() * colors.length)];
-    guesses = [];
     guessesLeft = 10;
+    guesses = [];
 
-    // Clear messages from previous game
-    document.getElementById("congratulations").innerHTML = "";
-    document.getElementById("lose").innerHTML = "";
-
-    updateAnswerArray();
-    updateGuessesLeft();
-    updateGuessedLetters();
-
-    console.log("New word:", word); // For testing
-}
-
-function updateAnswerArray() {
     answerArray = [];
-
     for (var i = 0; i < word.length; i++) {
-        var wordLetter = word[i];
-
-        if (guesses.includes(wordLetter)) {
-            answerArray.push(wordLetter);
-        } else {
-            answerArray.push("_");
-        }
+        answerArray[i] = "_";
     }
 
-    document.getElementById("answer").innerHTML =
+    updateDisplay();
+}
+
+function updateDisplay() {
+    document.getElementById("answer").textContent =
         answerArray.join(" ");
-}
 
-function updateGuessesLeft() {
-    document.getElementById("counter").innerHTML =
+    document.getElementById("counter").textContent =
         "Guesses Left: " + guessesLeft;
-}
 
-function updateGuessedLetters() {
-    document.getElementById("guesses").innerHTML =
+    document.getElementById("guesses").textContent =
         "Guessed Letters: " + guesses.join(", ");
+
+    document.getElementById("congratulations").textContent = "";
+    document.getElementById("lose").textContent = "";
 }
 
-initializeGame();
+function guessLetter(letter) {
+    letter = letter.toLowerCase();
 
-document.onkeyup = function (event) {
-
-    // Use modern keyboard input method
-    var letterInput = event.key.toLowerCase();
-
-    // Ignore non-letter keys
-    if (!/^[a-z]$/.test(letterInput)) {
+    // Ignore invalid guesses
+    if (letter.length !== 1 || !/[a-z]/.test(letter)) {
         return;
     }
 
-    console.log("Key pressed:", letterInput);
-    console.log("Current guesses:", guesses);
-    console.log("Word:", word);
-    console.log("Answer:", answerArray.join(""));
+    // Ignore repeated guesses
+    if (guesses.includes(letter)) {
+        return;
+    }
 
-    // Only process letters that haven't been guessed yet
-    if (!guesses.includes(letterInput)) {
+    guesses.push(letter);
 
-        guesses.push(letterInput);
-        updateGuessedLetters();
+    var found = false;
 
-        if (!word.includes(letterInput)) {
-            guessesLeft--;
-            updateGuessesLeft();
-
-            console.log("Guesses left:", guessesLeft);
+    for (var i = 0; i < word.length; i++) {
+        if (word[i] === letter) {
+            answerArray[i] = letter;
+            found = true;
         }
-
-        // Refresh displayed word after every new guess
-        updateAnswerArray();
     }
 
-    // Check for win
+    if (!found) {
+        guessesLeft--;
+    }
+
+    updateDisplay();
+
+    // Win check
     if (answerArray.join("") === word) {
-        document.getElementById("congratulations").innerHTML =
-            "Congratulations. You won!";
-
-        setTimeout(function () {
-            initializeGame();
-        }, 1500);
+        document.getElementById("congratulations").textContent =
+            "🎉 Congratulations! You guessed the word: " + word;
     }
 
-    // Check for loss
-    else if (guessesLeft === 0) {
-        document.getElementById("lose").innerHTML =
-            "Sorry. You lose. The word was '" + word + "'.";
-
-        setTimeout(function () {
-            initializeGame();
-        }, 1500);
+    // Lose check
+    if (guessesLeft <= 0) {
+        document.getElementById("lose").textContent =
+            "❌ Game Over! The word was: " + word;
     }
-};
+}
+
+// Listen for keyboard input
+document.addEventListener("keydown", function(event) {
+    if (
+        guessesLeft > 0 &&
+        answerArray.join("") !== word
+    ) {
+        guessLetter(event.key);
+    }
+});
