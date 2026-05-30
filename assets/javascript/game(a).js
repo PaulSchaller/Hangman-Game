@@ -10,6 +10,7 @@ initializeGame();
 
 function initializeGame() {
     word = colors[Math.floor(Math.random() * colors.length)];
+    console.log("Selected word:", word);
     guessesLeft = 10;
     guesses = [];
 
