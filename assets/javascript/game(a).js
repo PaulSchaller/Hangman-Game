@@ -1,3 +1,4 @@
+alert("game(a).js loaded");
 var colors = ["blue", "red", "purple", "pink", "green", "orange", "yellow", "gray"];
 
 var word;
