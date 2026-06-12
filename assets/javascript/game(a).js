@@ -8,6 +8,7 @@ var guesses;
 initializeGame();
 
 function initializeGame() {
+    document.body.style.backgroundColor = "white";
     word = colors[Math.floor(Math.random() * colors.length)];
     guessesLeft = 10;
     guesses = [];
