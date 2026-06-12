@@ -21,6 +21,12 @@ function initializeGame() {
 
     document.getElementById("congratulations").textContent = "";
     document.getElementById("lose").textContent = "";
+    
+    // reset background AFTER the DOM finishes updating
+    setTimeout(() => {
+        document.body.style.setProperty("background-color", "white", "important");
+    }, 0);
+}
 
     updateDisplay();
 }
