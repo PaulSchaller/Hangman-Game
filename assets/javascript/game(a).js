@@ -71,6 +71,12 @@ function guessLetter(letter) {
     // Win check
     if (answerArray.join("") === word) {
         "🎉 Congratulations! You guessed the word: " + word;
+        
+        function applyAnswerColor(word) {
+            // Convert the word to lowercase to match CSS color names
+            const color = word.toLowerCase();
+            // Change background to the color represented by the word
+            document.body.style.backgroundColor = color;}
     }
 
     // Lose check
