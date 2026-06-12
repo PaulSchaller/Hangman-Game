@@ -70,7 +70,7 @@ function guessLetter(letter) {
 
     // Win check
     if (answerArray.join("") === word) {
-        document.getElementById("congratulations").textContent =document.body.style.backgroundColor = "green";
+        document.body.style.backgroundColor = "green";
         "🎉 Congratulations! You guessed the word: " + word;
     }
 
