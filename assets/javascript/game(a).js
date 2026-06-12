@@ -77,6 +77,8 @@ function guessLetter(letter) {
             const color = word.toLowerCase();
             // Change background to the color represented by the word
             document.body.style.backgroundColor = color;}
+
+        applyAnswerColor(word);        
     }
 
     // Lose check
