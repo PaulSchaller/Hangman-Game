@@ -26,10 +26,8 @@ function initializeGame() {
     setTimeout(() => {
         document.body.style.setProperty("background-color", "white", "important");
     }, 0);
-}
 
     updateDisplay();
-}
 
 function updateDisplay() {
     document.getElementById("answer").textContent =
