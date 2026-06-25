@@ -28,6 +28,7 @@ function initializeGame() {
     }, 0);
 
     updateDisplay();
+}
 
 function updateDisplay() {
     document.getElementById("answer").textContent =
